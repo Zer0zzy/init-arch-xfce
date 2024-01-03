@@ -6,15 +6,15 @@ export RUN_PATH=$(pwd)
 sudo pacman -Syu --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # Install some packages
-yay -Syu extra/neovim extra/nodejs extra/python-virtualenv extra/python-pynvim catppuccin-cursors-mocha bibata-cursor-theme aur/ulauncher discord
+yay -Syu extra/neovim extra/nodejs extra/python-virtualenv extra/python-pynvim catppuccin-cursors-mocha bibata-cursor-theme aur/ulauncher discord gnome-boxes
 
 cd ~/Downloads
 wget https://github.com/BetterDiscord/Installer/releases/latest/download/BetterDiscord-Linux.AppImage
 
 # Make the directories
-mkdir ~/.themes
+mkdir ~/.local/share/themes
 mkdir ~/git
-mkdir ~/.fonts
+mkdir ~/.local/share/fonts
 cd ~/.fonts
 
 # Get Fonts and Icons
@@ -46,7 +46,7 @@ virtualenv -p python3 venv
 source venv/bin/activate
 python3 -m pip install --upgrade pip
 pip install -r requirements.txt
-python install.py mocha --tweaks float -a sapphire -d ~/.themes
+python install.py mocha --tweaks float -a sapphire -d ~/.local/share/themes
 deactivate
 cd ~/git
 git clone https://github.com/catppuccin/Kvantum.git
@@ -56,10 +56,10 @@ cp xfce4-terminal/src/* ~/.local/share/xfce4/terminal/colorschemes/
 cp $RUN_PATH/spooky_spill.jpg ~/.local/share/backgrounds/
 
 # Set Panel config
-while read -r line; do
-    xfconf-query --channel 'xfce4-panel' --property $(echo $line | awk '{print $1}') --set $(echo $line | awk '{print $2}');
-done < $RUN_PATH/xfconf-panel.txt
+#while read -r line; do
+#    xfconf-query --channel 'xfce4-panel' --property $(echo $line | awk '{print $1}') --set $(echo $line | awk '{print $2}');
+#done < $RUN_PATH/xfconf-panel.txt
 
 # Configure neovim
-curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-cp $RUN_PATH/init.vim ~/.config/nvim/
+#curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#cp $RUN_PATH/init.vim ~/.config/nvim/
